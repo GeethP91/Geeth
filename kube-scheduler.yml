@@ -1,0 +1,20 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: kube-scheduler
+  namespace: kube-system
+
+spec:
+  containers:
+    - command:
+        - kube-scheduler
+        - --address=127.0.0.1
+        - --kubeconfig=/etc/kubernetes/scheduler.conf
+        - --leader-elect=true # Is used when multiple copies of same scheduler are running at different nodes but only one can be active at a time
+        - --lock-object-name=my-custom-scheduler # To lock this object for differentiating from multiple scheduler
+  # For a custom scheduler add a line for scheduler name
+        - --schedule-name=my-custom-scheduler
+        image:<image name>
+        name: kube-scheduler

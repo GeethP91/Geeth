@@ -1,0 +1,11 @@
+apiVersion: v1
+
+kind: ConfigMap
+
+metadata:
+  name: app-config
+
+data: # instead of spec we have data for configmap
+  APP_COLOR: blue
+  APP_MODE: PROD
+

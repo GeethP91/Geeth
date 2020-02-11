@@ -1,0 +1,113 @@
+apiVersion: v1
+
+kind: Pod
+
+metadata:
+  name: bee
+  namespace: DEV
+  labels:
+    app: myapp
+    type: front-end
+  annotations: # used to record other details for informatory purposes mostly tool details, contact details etc
+    buildversion: 1.34
+
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      ports:
+        - containerPort: 8080
+  tolerations: # to add tolerations to the POD
+    - key: "spray"
+      operator: "Equal"
+      value: "mortein"
+      effect: "NoSchedule"
+      status: "Running"
+  # Can add a scheduler name so that if a POD is created it will be pick the right scheduler name
+  schedulerName: my-custom-scheduler
+  # To set limitation on POD to run on larger node or any node with required hardware resources
+  nodeSelector:
+    size: Large
+ # Setting limitation with Node Affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: size
+                operator: In # It is to ensure that the pod will be placed on a node with label size as specified in the values section
+                # Operator can be "Not In" with values as "Small"
+                # Operator can be "Exists" which will simply check but a value section is not required
+                values:
+                  - Large
+                  - Medium
+# Resource Requirements for each pod
+  resources:
+    requests:
+      memory: "1Gi"
+      cpu: 1
+    limits:
+      memory: "2Gi"
+      cpu: 2
+
+# It comes under the container part not under spec directly
+# To Inject ConfigMaps - first way
+    envFrom:
+    - configMapRef:
+        name: app-config # name of the config map we created for the application
+
+# To Inject ConfigMaps - second way
+  env:
+    - name: APP_COLOR
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: APP_COLOR
+# To Inject ConfigMaps - Third way
+  volumes:
+    - name: app-config-volume
+      configMap:
+        name: app-config
+
+ # To inject secrets in POD definition file first way
+
+  envFrom:
+    - secretRef:
+        name: app-secret
+
+ # To inject secrets in POD definition file Second way
+  env:
+    - name: DB_Password
+      valueFrom:
+        secretKeyRef:
+          name: app-secret
+          key: DB_Password
+  # # To inject secrets in POD definition file Third way
+
+  volumes:
+    - name: app-secret-volume
+      secret:
+        secretName: app-secret
+
+# To add multi container PODs
+
+# To add network policy for the POD
+
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podselector:
+            matchLabels:
+              name: api-pod
+        ports:
+          - protocol: TCP
+            port: 3306
+
+# To create volume and mount it
+
+  volumes:
+    - name: data_volume
+      hostPath:
+        path: /data
+        type: Directory

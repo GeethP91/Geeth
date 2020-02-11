@@ -1,0 +1,44 @@
+apiVersion: certificates.k8s.io/v1beta1
+
+kind: CertificateSigningRequest
+
+metadata:
+  name: Geeth
+
+
+spec:
+  groups:
+    -system:authenticated
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+  request: MIICVjCCAT4CAQAwETEPMA0GA1UEAwwGYWtzaGF5MIIBIjANBgkqhkiG9w0BAQEF
+AAOCAQ8AMIIBCgKCAQEAvd+NnFXQrkbJQ/26X8+p4HT0In//g0etFPNqfyqhEBcQ
+tGGfnrT4U8j+gPwNXHeYTnJ7lcsbKXk23b51d77tOdzx2fxyK/c0soOB6XFSVo3p
+zi3JC08dpRMRMgEnv9QGbMK1EmIlpRTFqLktsa/ri45uGah00qbxum2JqqqsIKkl
+nLdhB6XEMD2ETYS3oi95D1coe29syFkDqeQlB79OaCV+7aloU+Pg4C+3q+Gzgfz0
+fFnjAUvqYECa/Hh/cfXE+A8u7mNBPHJBsb6P43kfQHqy+7+M7i5bHZpV9mishdvK
+7TYtRpXfcZJlg3u33O3Jjj0xmllv1Sjy/aTRcV4v+QIDAQABoAAwDQYJKoZIhvcN
+AQELBQADggEBAJ72+CIXJ7Z3lKht5lrZM2aL5J0MR9CaZ7qaMvTF/V0Ej/zaZSYA
+ciF741eYtZrdamARXzpK/qeD9/AeoDOWaetVa6dRpmQPTW/RnlbhLsYfpl+eOcXG
+/xxy4Eik8/y3HDgYJuSCjhbHfrd3mfDJ66fj+hcyx4i+F5XaQo0Uk1jXEczcjCzL
+1d95OITjC8BnRtpnm2QvkPRvDcRtFaaODp74qoNQ6FzNaaKaJ119P19epFyx3N/r
+fhyj8dRm+1jg8GjmOKvG+HDaWfg7BSf4uhQ8UEk/MO6T035zlD4U/Jseausrwhu5
+JRsJ6+dmxdgA3ns96E5pcAqep95Xq2w+1oM=
+
+-----------------------------------------------------------------------------------------------------------------
+
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: akshay
+spec:
+  groups:
+  - system:authenticated
+  request: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURSBSRVFVRVNULS0tLS0KTUlJQ1ZqQ0NBVDRDQVFBd0VURVBNQTBHQTFVRUF3d0dZV3R6YUdGNU1JSUJJakFOQmdrcWhraUc5dzBCQVFFRgpBQU9DQVE4QU1JSUJDZ0tDQVFFQXZkK05uRlhRcmtiSlEvMjZYOCtwNEhUMEluLy9nMGV0RlBOcWZ5cWhFQmNRCnRHR2ZuclQ0VThqK2dQd05YSGVZVG5KN2xjc2JLWGsyM2I1MWQ3N3RPZHp4MmZ4eUsvYzBzb09CNlhGU1ZvM3AKemkzSkMwOGRwUk1STWdFbnY5UUdiTUsxRW1JbHBSVEZxTGt0c2Evcmk0NXVHYWgwMHFieHVtMkpxcXFzSUtrbApuTGRoQjZYRU1EMkVUWVMzb2k5NUQxY29lMjlzeUZrRHFlUWxCNzlPYUNWKzdhbG9VK1BnNEMrM3ErR3pnZnowCmZGbmpBVXZxWUVDYS9IaC9jZlhFK0E4dTdtTkJQSEpCc2I2UDQza2ZRSHF5KzcrTTdpNWJIWnBWOW1pc2hkdksKN1RZdFJwWGZjWkpsZzN1MzNPM0pqajB4bWxsdjFTankvYVRSY1Y0ditRSURBUUFCb0FBd0RRWUpLb1pJaHZjTgpBUUVMQlFBRGdnRUJBSjcyK0NJWEo3WjNsS2h0NWxyWk0yYUw1SjBNUjlDYVo3cWFNdlRGL1YwRWovemFaU1lBCmNpRjc0MWVZdFpyZGFtQVJYenBLL3FlRDkvQWVvRE9XYWV0VmE2ZFJwbVFQVFcvUm5sYmhMc1lmcGwrZU9jWEcKL3h4eTRFaWs4L3kzSERnWUp1U0NqaGJIZnJkM21mREo2NmZqK2hjeXg0aStGNVhhUW8wVWsxalhFY3pjakN6TAoxZDk1T0lUakM4Qm5SdHBubTJRdmtQUnZEY1J0RmFhT0RwNzRxb05RNkZ6TmFhS2FKMTE5UDE5ZXBGeXgzTi9yCmZoeWo4ZFJtKzFqZzhHam1PS3ZHK0hEYVdmZzdCU2Y0dWhROFVFay9NTzZUMDM1emxENFUvSnNlYXVzcndodTUKSlJzSjYrZG14ZGdBM25zOTZFNXBjQXFlcDk1WHEydysxb009Ci0tLS0tRU5EIENFUlRJRklDQVRFIFJFUVVFU1QtLS0tLQo=
+  usages:
+  - digital signature
+  - key encipherment
+  - server auth
+

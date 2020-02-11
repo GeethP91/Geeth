@@ -1,0 +1,54 @@
+Name: app
+Container Name: sidecar
+Container Image: kodekloud/filebeat-configured
+Volume Mount: log-volume
+Mount Path: /var/log/event-simulator/
+Existing Container Name: app
+Existing Container Image: kodekloud/event-simulator
+
+
+# initContainers:
+
+initContainers:
+  - command:
+      - sh
+      - -c
+      - sleep 600
+  image:
+
+
+
+Containers:
+  app:
+    Container ID:   docker://c76060ecebe5c5c91aa0d55c324eb008c95f18d729a5de385e48127f45036886
+    Image:          kodekloud/event-simulator
+    Image ID:       docker-pullable://kodekloud/event-simulator@sha256:1e3e9c72136bbc76c96dd98f29c04f298c3ae241c7d44e2bf70bcc209b030bf9
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Thu, 26 Dec 2019 09:49:13 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /log from log-volume (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-9zz4f (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  log-volume:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/log/webapp
+    HostPathType:  DirectoryOrCreate
+  default-token-9zz4f:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-9zz4f
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s

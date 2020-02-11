@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Config
+
+current-context: dev-user@google #the default context that can be referred
+
+clusters:
+  - name: My-cluster
+    cluster:
+      certificate-authority: ca.crt # Provide full path
+      # Instead of providing the authority part we can add the below path which includes the content of the crt file
+      certificate-authority-data: MIICVjCCAT4CAQAwETEPMA0GA1UEAwwGYWtzaGF5MIIBIjANBgkqhkiG9w0BAQEF
+      AAOCAQ8AMIIBCgKCAQEAvd+NnFXQrkbJQ/26X8+p4HT0In//g0etFPNqfyqhEBcQ
+      tGGfnrT4U8j+gPwNXHeYTnJ7lcsbKXk23b51d77tOdzx2fxyK/c0soOB6XFSVo3p
+      zi3JC08dpRMRMgEnv9QGbMK1EmIlpRTFqLktsa/ri45uGah00qbxum2JqqqsIKkl
+      nLdhB6XEMD2ETYS3oi95D1coe29syFkDqeQlB79OaCV+7aloU+Pg4C+3q+Gzgfz0
+      fFnjAUvqYECa/Hh/cfXE+A8u7mNBPHJBsb6P43kfQHqy+7+M7i5bHZpV9mishdvK
+      7TYtRpXfcZJlg3u33O3Jjj0xmllv1Sjy/aTRcV4v+QIDAQABoAAwDQYJKoZIhvcN
+      AQELBQADggEBAJ72+CIXJ7Z3lKht5lrZM2aL5J0MR9CaZ7qaMvTF/V0Ej/zaZSYA
+      ciF741eYtZrdamARXzpK/qeD9/AeoDOWaetVa6dRpmQPTW/RnlbhLsYfpl+eOcXG
+      /xxy4Eik8/y3HDgYJuSCjhbHfrd3mfDJ66fj+hcyx4i+F5XaQo0Uk1jXEczcjCzL
+      1d95OITjC8BnRtpnm2QvkPRvDcRtFaaODp74qoNQ6FzNaaKaJ119P19epFyx3N/r
+      fhyj8dRm+1jg8GjmOKvG+HDaWfg7BSf4uhQ8UEk/MO6T035zlD4U/Jseausrwhu5
+      JRsJ6+dmxdgA3ns96E5pcAqep95Xq2w+1oM=
+      server: https://kube-apiserver:6443
+
+
+contexts:
+  - name: my-context
+    context:
+      cluster: My-cluster
+      user: kubernetes-admin
+      namespace: DEV
+
+
+users:
+  - name: kubernetes-admin
+    user:
+      client-certificate: admin.crt
+      client-key: admin.key
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+apiVersion: v1
+kind: Config
+
+clusters:
+- name: production
+  cluster:
+    certificate-authority: /etc/kubernetes/pki/ca.crt
+    server: https://172.17.0.48:6443
+
+- name: development
+  cluster:
+    certificate-authority: /etc/kubernetes/pki/ca.crt
+    server: https://172.17.0.48:6443
+
+- name: kubernetes-on-aws
+  cluster:
+    certificate-authority: /etc/kubernetes/pki/ca.crt
+    server: https://172.17.0.48:6443
+
+- name: test-cluster-1
+  cluster:
+    certificate-authority: /etc/kubernetes/pki/ca.crt
+    server: https://172.17.0.48:6443
+
+contexts:
+- name: test-user@development
+  context:
+    cluster: development
+    user: test-user
+
+- name: aws-user@kubernetes-on-aws
+  context:
+    cluster: kubernetes-on-aws
+    user: aws-user
+
+- name: test-user@production
+  context:
+    cluster: production
+    user: test-user
+
+- name: research
+  context:
+    cluster: test-cluster-1
+    user: dev-user
+
+users:
+- name: test-user
+  user:
+    client-certificate: /etc/kubernetes/pki/users/test-user/test-user.crt
+    client-key: /etc/kubernetes/pki/users/test-user/test-user.key
+- name: dev-user
+  user:
+    client-certificate: /etc/kubernetes/pki/users/dev-user/developer-user.crt
+    client-key: /etc/kubernetes/pki/users/dev-user/dev-user.key
+- name: aws-user
+  user:
+    client-certificate: /etc/kubernetes/pki/users/aws-user/aws-user.crt
+    client-key: /etc/kubernetes/pki/users/aws-user/aws-user.key
+
+current-context: test-user@development
+preferences: {}
